@@ -4,6 +4,7 @@ import com.dasha.despensapp.controller.dto.CategoryDTO;
 import com.dasha.despensapp.controller.dto.UserDTO;
 import com.dasha.despensapp.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,13 +12,12 @@ import java.util.List;
 @RestController
 @RequestMapping("user")
 public class UserController {
-    @Autowired
-    private UserService userService;
 
-    @PostMapping
-    public UserDTO insertUser(@RequestBody UserDTO dto) {
 
-        return userService.insertUser(dto);
-    }
+//    @PostMapping
+//    public UserDTO insertUser(@RequestBody UserDTO dto) {
+//
+//        return userService.insertUser(dto);
+//    }
 
 }

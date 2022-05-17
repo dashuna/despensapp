@@ -8,7 +8,7 @@ public class UserDTO {
     private String last_name;
     private String email;
     private String telephone;
-    private byte photo;
+    private byte[] photo;
 
     public Long getId() {
         return id;
@@ -66,11 +66,11 @@ public class UserDTO {
         this.telephone = telephone;
     }
 
-    public byte getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 }

@@ -15,12 +15,12 @@ public class UserJPA {
     private String last_name;
     private String email;
     private String telephone;
-    private byte photo;
+    private byte[] photo;
 
     public UserJPA() {
     }
 
-    public UserJPA(Long id, String user, String password, String name, String last_name, String email, String telephone, byte photo) {
+    public UserJPA(Long id, String user, String password, String name, String last_name, String email, String telephone, byte[] photo) {
         this.id = id;
         this.user = user;
         this.password = password;
@@ -87,11 +87,11 @@ public class UserJPA {
         this.telephone = telephone;
     }
 
-    public byte getPhoto() {
+    public byte[] getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte photo) {
+    public void setPhoto(byte[] photo) {
         this.photo = photo;
     }
 }
