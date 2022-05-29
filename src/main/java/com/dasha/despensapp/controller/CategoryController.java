@@ -26,8 +26,6 @@ public class CategoryController {
 
     @GetMapping
     public List<CategoryDTO> getCategories() {
-        CustomUserDetails user = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.err.println("El usuario es: "+ user.getUsername());
         return categoryService.getAllCategories();
     }
 }

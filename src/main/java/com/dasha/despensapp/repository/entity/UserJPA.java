@@ -1,6 +1,7 @@
 package com.dasha.despensapp.repository.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -16,6 +17,9 @@ public class UserJPA {
     private String email;
     private String telephone;
     private byte[] photo;
+
+    @OneToMany(mappedBy="user")
+    private List<UserInventoryJPA> userInventories;
 
     public UserJPA() {
     }
@@ -93,5 +97,13 @@ public class UserJPA {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public List<UserInventoryJPA> getUserInventories() {
+        return userInventories;
+    }
+
+    public void setUserInventories(List<UserInventoryJPA> userInventories) {
+        this.userInventories = userInventories;
     }
 }
