@@ -1,6 +1,7 @@
 package com.dasha.despensapp.repository.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Entity
@@ -11,6 +12,9 @@ public class CategoryJPA {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @OneToMany(mappedBy="category")
+    private List<ProductJPA> products;
 
     public Long getId() {
         return id;
@@ -26,5 +30,13 @@ public class CategoryJPA {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<ProductJPA> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductJPA> products) {
+        this.products = products;
     }
 }

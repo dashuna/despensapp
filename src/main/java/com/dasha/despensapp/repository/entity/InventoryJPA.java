@@ -14,6 +14,8 @@ public class InventoryJPA {
     @OneToMany(mappedBy="inventory")
     private List<UserInventoryJPA> userInventories;
 
+    @OneToMany(mappedBy="inventory")
+    private List<ProductJPA> products;
 
     public Long getId() {
         return id;
@@ -37,5 +39,13 @@ public class InventoryJPA {
 
     public void setUserInventories(List<UserInventoryJPA> userInventories) {
         this.userInventories = userInventories;
+    }
+
+    public List<ProductJPA> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductJPA> products) {
+        this.products = products;
     }
 }
