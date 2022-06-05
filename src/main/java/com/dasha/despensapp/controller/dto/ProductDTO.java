@@ -8,18 +8,29 @@ public class ProductDTO {
     private String description;
     private CategoryDTO category;
     private byte[] photo;
+
+    private Long inventoryId;
     private Long amount;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, String description, CategoryDTO category, byte[] photo, Long amount) {
+    public ProductDTO(Long id, String name, String description, CategoryDTO category, byte[] photo, Long inventoryId, Long amount) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.category = category;
         this.photo = photo;
+        this.inventoryId = inventoryId;
         this.amount = amount;
+    }
+
+    public Long getInventoryId() {
+        return inventoryId;
+    }
+
+    public void setInventoryId(Long inventoryId) {
+        this.inventoryId = inventoryId;
     }
 
     public Long getId() {

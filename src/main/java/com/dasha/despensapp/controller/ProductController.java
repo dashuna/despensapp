@@ -19,4 +19,9 @@ public class ProductController {
     public List<ProductDTO> getProducts(@RequestParam Long idInventory) {
         return productService.getProducts(idInventory);
     }
+
+    @PostMapping
+    public ProductDTO saveProduct(@RequestBody ProductDTO productDTO) {
+        return productService.saveProduct(productDTO);
+    }
 }
