@@ -28,18 +28,6 @@ public class ProductService {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    private ProductDTO mapToDTO(ProductJPA jpa) {
-        ProductDTO dto = new ProductDTO();
-        dto.setId(jpa.getId());
-        dto.setName(jpa.getName());
-        dto.setDescription(jpa.getDescription());
-        dto.setCategory(mapToDTO(jpa.getCategory()));
-        dto.setPhoto(jpa.getPhoto());
-        dto.setAmount(jpa.getAmount());
-
-        return dto;
-    }
-
     public List<ProductDTO> getProducts(Long idInventory) {
         List<ProductJPA> products = productRepository.findByInventoryId(idInventory);
         List<ProductDTO> dtos = new ArrayList<>();
@@ -57,6 +45,28 @@ public class ProductService {
         return mapToDTO(guardado);
     }
 
+
+    public ProductDTO getById(Long id) {
+        ProductJPA productJpa = productRepository.getById(id);
+//        Optional<ProductJPA> dos = productRepository.findById(id);
+        return mapToDTO(productJpa);
+    }
+
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+
+    }
+
+    private ProductDTO mapToDTO(ProductJPA jpa) {
+        ProductDTO dto = new ProductDTO();
+        dto.setId(jpa.getId());
+        dto.setName(jpa.getName());
+        dto.setDescription(jpa.getDescription());
+        dto.setCategory(mapToDTO(jpa.getCategory()));
+        dto.setPhoto(jpa.getPhoto());
+        dto.setAmount(jpa.getAmount());
+        return dto;
+    }
 
     private ProductJPA mapToJPA (ProductDTO dto) {
         ProductJPA jpa = new ProductJPA();
@@ -76,5 +86,6 @@ public class ProductService {
         CategoryDTO dto = new CategoryDTO(jpa.getId(), jpa.getName());
         return dto;
     }
+
 
 }

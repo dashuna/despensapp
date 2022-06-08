@@ -16,4 +16,6 @@ public interface ProductRepository extends JpaRepository<ProductJPA, Long> {
             "WHERE P.inventory.id = :idInventory")
     List<ProductJPA> findByInventoryId(@Param("idInventory") Long idInventory);
 
+
+
 }
