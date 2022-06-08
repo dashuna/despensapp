@@ -4,10 +4,7 @@ import com.dasha.despensapp.config.JwtTokenUtil;
 import com.dasha.despensapp.controller.dto.InventoryDTO;
 import com.dasha.despensapp.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,4 +23,12 @@ public class InventoryController {
     public List<InventoryDTO> getInventories() {
         return inventoryService.getInventories(jwtTokenUtil.getIdUser());
     }
+
+    //crear un nuevo inventario
+    @PostMapping
+    public InventoryDTO saveInventory(@RequestBody InventoryDTO inventoryDTO) {
+        return inventoryService.saveInventory(inventoryDTO);
+    }
+
+    //compartir un inventario con otros usuarios
 }

@@ -16,6 +16,8 @@ public class InventoryService {
     @Autowired
     private UserInventoryRepository userInventoryRepository;
 
+    private InventoryRepository inventoryRepository;
+
     public List<InventoryDTO> getInventories(Long idUser) {
         List<InventoryJPA> inventories = userInventoryRepository.findByUserId(idUser);
         List<InventoryDTO> dtos = new ArrayList<>();
@@ -24,8 +26,13 @@ public class InventoryService {
             InventoryDTO dto = mapToDTO(jpa);
             dtos.add(dto);
         }
-
         return dtos;
+    }
+
+    public InventoryDTO saveInventory(InventoryDTO dto) {
+        InventoryJPA jpa = mapToJPA(dto);
+        InventoryJPA guardado = inventoryRepository.save(jpa);
+        return mapToDTO(guardado);
     }
 
     private InventoryDTO mapToDTO(InventoryJPA jpa) {
@@ -33,5 +40,13 @@ public class InventoryService {
         dto.setId(jpa.getId());
         dto.setName(jpa.getName());
         return dto;
+    }
+
+    private InventoryJPA mapToJPA (InventoryDTO dto) {
+        InventoryJPA jpa = new InventoryJPA();
+        jpa.setId(dto.getId());
+        jpa.setName(dto.getName());
+
+        return jpa;
     }
 }
