@@ -18,6 +18,8 @@ public class UserInventoryJPA {
     @JoinColumn(name="id_user", nullable=false)
     private UserJPA user;
 
+    private Boolean accepted;
+
     public Long getId() {
         return id;
     }
@@ -40,5 +42,13 @@ public class UserInventoryJPA {
 
     public void setUser(UserJPA user) {
         this.user = user;
+    }
+
+    public Boolean getAccepted() {
+        return accepted;
+    }
+
+    public void setAccepted(Boolean accepted) {
+        this.accepted = accepted;
     }
 }

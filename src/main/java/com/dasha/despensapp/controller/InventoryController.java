@@ -27,7 +27,7 @@ public class InventoryController {
     //crear un nuevo inventario
     @PostMapping
     public InventoryDTO saveInventory(@RequestBody InventoryDTO inventoryDTO) {
-        return inventoryService.saveInventory(inventoryDTO);
+        return inventoryService.saveInventory(inventoryDTO, jwtTokenUtil.getIdUser());
     }
 
     //compartir un inventario con otros usuarios
