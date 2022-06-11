@@ -26,7 +26,11 @@ public class JwtUserDetailsService implements UserDetailsService {
     public UserDTO insertUser(UserDTO dto) {
         UserJPA jpa = mapToJPA(dto);
         jpa.setId(null);
+//        jpa.setUser(dto.getUser());
         jpa.setPassword(bcryptEncoder.encode(dto.getPassword()));
+//        jpa.setName(dto.getName());
+//        jpa.setLast_name(dto.getLast_name());
+//        jpa.setEmail(dto.getEmail());
 
 
         UserJPA guardado = userRepository.save(jpa);

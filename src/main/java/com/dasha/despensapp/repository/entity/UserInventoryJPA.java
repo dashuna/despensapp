@@ -19,6 +19,7 @@ public class UserInventoryJPA {
     private UserJPA user;
 
     private Boolean accepted;
+    private Boolean isAdmin;
 
     public Long getId() {
         return id;
@@ -50,5 +51,13 @@ public class UserInventoryJPA {
 
     public void setAccepted(Boolean accepted) {
         this.accepted = accepted;
+    }
+
+    public Boolean getAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        isAdmin = admin;
     }
 }
