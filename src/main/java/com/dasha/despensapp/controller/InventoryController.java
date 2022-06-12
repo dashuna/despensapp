@@ -3,6 +3,7 @@ package com.dasha.despensapp.controller;
 import com.dasha.despensapp.config.JwtTokenUtil;
 import com.dasha.despensapp.controller.dto.InventoryDTO;
 import com.dasha.despensapp.controller.dto.UserDTO;
+import com.dasha.despensapp.controller.dto.UserInventoryDTO;
 import com.dasha.despensapp.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +21,12 @@ public class InventoryController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+//    @GetMapping
+//    public List<InventoryDTO> getInventories() {
+//        return inventoryService.getInventories(jwtTokenUtil.getIdUser());
+//    }
     @GetMapping
-    public List<InventoryDTO> getInventories() {
+    public List<UserInventoryDTO> getInventories() {
         return inventoryService.getInventories(jwtTokenUtil.getIdUser());
     }
 
@@ -34,6 +39,11 @@ public class InventoryController {
     @GetMapping(path = "/{idInventory}/users")
     public List<UserDTO> getUsersByInventory(@PathVariable Long idInventory) {
         return inventoryService.getUserByInventory(idInventory);
+    }
+
+    @GetMapping(path = "/{idInventory}/user")
+    public UserInventoryDTO getUserByInventory(@PathVariable Long idInventory) {
+        return inventoryService.getByUserAndInventoryId(jwtTokenUtil.getIdUser(), idInventory);
     }
 
     //compartir un inventario con otros usuarios

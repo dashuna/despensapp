@@ -13,9 +13,15 @@ import java.util.List;
 @Repository
 public interface UserInventoryRepository extends JpaRepository<UserInventoryJPA, Long> {
 
-    @Query("SELECT U.inventory FROM UserInventoryJPA U WHERE U.user.id = :userId")
-    List<InventoryJPA> findByUserId(@Param("userId") Long userId);
+//    @Query("SELECT U.inventory FROM UserInventoryJPA U WHERE U.user.id = :userId")
+//    List<InventoryJPA> findByUserId(@Param("userId") Long userId);
+
+    @Query("SELECT U FROM UserInventoryJPA U WHERE U.user.id = :userId")
+    List<UserInventoryJPA> findByUserId(@Param("userId") Long userId);
 
     @Query("SELECT U.user FROM UserInventoryJPA U WHERE U.inventory.id = :inventoryId")
     List<UserJPA> findUserByInventory(@Param("inventoryId") Long inventoryId);
+
+    @Query("SELECT U FROM UserInventoryJPA U WHERE U.user.id = :userId AND U.inventory.id = :inventoryId")
+    UserInventoryJPA findByUserIdAndInventoryId(@Param("userId")Long userId,@Param("inventoryId") Long inventoryId);
 }

@@ -2,6 +2,7 @@ package com.dasha.despensapp.services;
 
 import com.dasha.despensapp.controller.dto.InventoryDTO;
 import com.dasha.despensapp.controller.dto.UserDTO;
+import com.dasha.despensapp.controller.dto.UserInventoryDTO;
 import com.dasha.despensapp.repository.InventoryRepository;
 import com.dasha.despensapp.repository.UserInventoryRepository;
 import com.dasha.despensapp.repository.UserRepository;
@@ -26,12 +27,23 @@ public class InventoryService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<InventoryDTO> getInventories(Long idUser) {
-        List<InventoryJPA> inventories = userInventoryRepository.findByUserId(idUser);
-        List<InventoryDTO> dtos = new ArrayList<>();
+//    public List<InventoryDTO> getInventories(Long idUser) {
+//        List<InventoryJPA> inventories = userInventoryRepository.findByUserId(idUser);
+//        List<InventoryDTO> dtos = new ArrayList<>();
+//
+//        for (InventoryJPA jpa : inventories) {
+//            InventoryDTO dto = mapToDTO(jpa);
+//            dtos.add(dto);
+//        }
+//        return dtos;
+//    }
 
-        for (InventoryJPA jpa : inventories) {
-            InventoryDTO dto = mapToDTO(jpa);
+    public List<UserInventoryDTO> getInventories(Long idUser) {
+        List<UserInventoryJPA> inventories = userInventoryRepository.findByUserId(idUser);
+        List<UserInventoryDTO> dtos = new ArrayList<>();
+
+        for (UserInventoryJPA jpa : inventories) {
+            UserInventoryDTO dto = mapToDTO(jpa);
             dtos.add(dto);
         }
         return dtos;
@@ -60,6 +72,12 @@ public class InventoryService {
             dtos.add(dto);
         }
         return dtos;
+    }
+
+    public UserInventoryDTO getByUserAndInventoryId(Long idUser, Long idInventory) {
+        UserInventoryJPA userInventory = userInventoryRepository.findByUserIdAndInventoryId(idUser, idInventory);
+        UserInventoryDTO userInventoryDTO = mapToDTO(userInventory);
+        return userInventoryDTO;
     }
 
     /*public InventoryDTO sendInvitation(InventoryDTO dto, String user) {
@@ -92,13 +110,23 @@ public class InventoryService {
         UserDTO dto = new UserDTO();
         dto.setId(jpa.getId());
         dto.setUser(jpa.getUser());
-        dto.setPassword(jpa.getPassword());
+        //dto.setPassword(jpa.getPassword());
         dto.setName(jpa.getName());
         dto.setLast_name(jpa.getLast_name());
         dto.setEmail(jpa.getEmail());
         dto.setTelephone(jpa.getTelephone());
         dto.setPhoto(jpa.getPhoto());
 
+        return dto;
+    }
+
+    private UserInventoryDTO mapToDTO (UserInventoryJPA jpa) {
+        UserInventoryDTO dto = new UserInventoryDTO();
+        dto.setId(jpa.getId());
+        dto.setInventory(mapToDTO(jpa.getInventory()));
+//        dto.setIdUser(mapToDTO(jpa.getUser()));
+        dto.setAccepted(jpa.getAccepted());
+        dto.setAdmin(jpa.getAdmin());
         return dto;
     }
 }
