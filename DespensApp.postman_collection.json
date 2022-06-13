@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"arisco\",\r\n    \"password\": \"arisco\"\r\n}\r\n   \r\n",
+							"raw": "{\r\n    \"username\": \"user\",\r\n    \"password\": \"user\"\r\n}\r\n   \r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -41,7 +41,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"user\": \"dashuna\",\r\n    \"password\": \"dashuna\",\r\n    \"name\": \"Darya\",\r\n    \"last_name\": \"Lynnyk\",\r\n    \"email\": \"dashuna@cat.com\",\r\n    \"telephone\": \"156125415\"\r\n}",
+							"raw": "{\r\n    \"user\": \"user\",\r\n    \"password\": \"user\",\r\n    \"name\": \"Usuario\",\r\n    \"last_name\": \"Userº\",\r\n    \"email\": \"user@cat.com\",\r\n    \"telephone\": \"156125415\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -69,31 +69,109 @@
 					"name": "Inventories",
 					"request": {
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/inventories",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"inventories"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "User by Inventory",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOjEsImV4cCI6MTY1NTA0NDUwNiwiaWF0IjoxNjU1MDI2NTA2LCJlbWFpbCI6InVzZXJAY2F0LmNvbSJ9.lzdO8yYgpk2dmHztEyG__3RSbDkyDCJvxiMgyOIbg4hvB9TV0IwrEK2MeDlJWGXB2ZdTtbWyBrsaPta536FQVA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/inventory/1/user",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"inventory",
+								"1",
+								"user"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "Invitation",
 					"request": {
-						"method": "GET",
-						"header": []
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOjEsImV4cCI6MTY1NTA2OTk5NSwiaWF0IjoxNjU1MDUxOTk1LCJlbWFpbCI6InVzZXJAY2F0LmNvbSJ9.0P_a_5_gULbkghCs3ph5goyzI5-sjQxtqEeH-FbpzTojrO98vm5Zq6M12pS93piNUMFGRR5_1qPwmEVuOaT3Aw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/inventory/1/invitation/dasha",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"inventory",
+								"1",
+								"invitation",
+								"dasha"
+							]
+						}
 					},
 					"response": []
 				},
 				{
 					"name": "List User By Inventory",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOjEsImV4cCI6MTY1NDk4MjQ0OSwiaWF0IjoxNjU0OTY0NDQ5LCJlbWFpbCI6InVzZXJAY2F0LmNvbSJ9.kbBpD9x-rnaGrd2C0OFNntHRmBBVWYHi3doBFb3KA5kuBzYDyMOYg_qCJMgaiw56AFrzIu827BtRdyWLXuTYQg",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
-						"header": []
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/inventory/yolo?idInventory=1",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"inventory",
+								"yolo"
+							],
+							"query": [
+								{
+									"key": "idInventory",
+									"value": "1"
+								}
+							]
+						}
 					},
 					"response": []
 				}
@@ -127,13 +205,13 @@
 							],
 							"query": [
 								{
+									"key": "idInventory",
+									"value": "1"
+								},
+								{
 									"key": "",
 									"value": "",
 									"disabled": true
-								},
-								{
-									"key": "idInventory",
-									"value": "1"
 								}
 							]
 						}
@@ -143,6 +221,16 @@
 				{
 					"name": "Product By ID",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOjEsImV4cCI6MTY1NDYzODg5OSwiaWF0IjoxNjU0NjIwODk5LCJlbWFpbCI6InVzZXJAY2F0LmNvbSJ9.34NLPLjksyVwT1kJ5JpYTmKpbgOd_QYryH7DFclHXzNWZ4xfvmfhfZic62HFV59FWCVMTwvvac3-QHwVUpKQBw",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -161,7 +249,7 @@
 				{
 					"name": "Delete Product By ID",
 					"request": {
-						"method": "GET",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "{{despensapp_api}}/product/1",
