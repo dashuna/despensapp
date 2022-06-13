@@ -1,0 +1,198 @@
+{
+	"info": {
+		"_postman_id": "8302e1d6-5150-481b-a506-89308ac7e9ba",
+		"name": "DespensApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"arisco\",\r\n    \"password\": \"arisco\"\r\n}\r\n   \r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{despensapp_api}}/authenticate",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": \"dashuna\",\r\n    \"password\": \"dashuna\",\r\n    \"name\": \"Darya\",\r\n    \"last_name\": \"Lynnyk\",\r\n    \"email\": \"dashuna@cat.com\",\r\n    \"telephone\": \"156125415\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{despensapp_api}}/register",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Inventory",
+			"item": [
+				{
+					"name": "Inventories",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "User by Inventory",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Invitation",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "List User By Inventory",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Products by Inventory",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiaWQiOjEsImV4cCI6MTY1NDM1OTgzNCwiaWF0IjoxNjU0MzQxODM0LCJlbWFpbCI6InVzZXJAY2F0LmNvbSJ9.6J6Zj_XDv7gNyi_uN3V8lOCqJjkezGAHeORQ99Tqp5O-dzEHTdslLfSayHR-VBOuOjXOxPF02APwi_sKhBImYQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/product?idInventory=1",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "idInventory",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/product/1",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product By ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{despensapp_api}}/product/1",
+							"host": [
+								"{{despensapp_api}}"
+							],
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
