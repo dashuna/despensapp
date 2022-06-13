@@ -62,11 +62,12 @@ public class InventoryService {
 
         return mapToDTO(guardado);
     }
+
     public List<UserDTO> getUserByInventory(Long idInventory) {
         List<UserJPA> users = userInventoryRepository.findUserByInventory(idInventory);
         List<UserDTO> dtos = new ArrayList<>();
 
-        for(UserJPA jpa : users) {
+        for (UserJPA jpa : users) {
             UserDTO dto = mapToDTO(jpa);
             dto.setPassword(null);
             dtos.add(dto);
@@ -80,15 +81,20 @@ public class InventoryService {
         return userInventoryDTO;
     }
 
-    /*public InventoryDTO sendInvitation(InventoryDTO dto, String user) {
-        InventoryJPA jpa = mapToJPA(dto);
-        InventoryJPA inventoryJPA = inventoryRepository.getById(jpa.getId());
+    public UserInventoryDTO sendInvitation(Long idInventory, String user) {
+//        UserInventoryJPA jpa = mapToJPA(idInventory);
+//        InventoryJPA inventoryJPA = inventoryRepository.getById();
 
         UserInventoryJPA userInventoryJPA = new UserInventoryJPA();
-        userInventoryJPA.setInventory(inventoryJPA);
-        userInventoryJPA.setUser(userRepository.getById());
+        userInventoryJPA.setInventory(inventoryRepository.getById(idInventory));
+        userInventoryJPA.setUser(userRepository.findByUser(user).get());
         userInventoryJPA.setAccepted(false);
-    }*/
+        userInventoryJPA.setAdmin(false);
+        userInventoryRepository.save(userInventoryJPA);
+
+        return mapToDTO(userInventoryJPA);
+
+    }
 
 
     private InventoryDTO mapToDTO(InventoryJPA jpa) {
@@ -98,7 +104,7 @@ public class InventoryService {
         return dto;
     }
 
-    private InventoryJPA mapToJPA (InventoryDTO dto) {
+    private InventoryJPA mapToJPA(InventoryDTO dto) {
         InventoryJPA jpa = new InventoryJPA();
         jpa.setId(dto.getId());
         jpa.setName(dto.getName());
@@ -106,7 +112,7 @@ public class InventoryService {
         return jpa;
     }
 
-    private UserDTO mapToDTO (UserJPA jpa) {
+    private UserDTO mapToDTO(UserJPA jpa) {
         UserDTO dto = new UserDTO();
         dto.setId(jpa.getId());
         dto.setUser(jpa.getUser());
@@ -120,7 +126,7 @@ public class InventoryService {
         return dto;
     }
 
-    private UserInventoryDTO mapToDTO (UserInventoryJPA jpa) {
+    private UserInventoryDTO mapToDTO(UserInventoryJPA jpa) {
         UserInventoryDTO dto = new UserInventoryDTO();
         dto.setId(jpa.getId());
         dto.setInventory(mapToDTO(jpa.getInventory()));
@@ -129,4 +135,10 @@ public class InventoryService {
         dto.setAdmin(jpa.getAdmin());
         return dto;
     }
+
+//    private UserInventoryJPA mapToJPA (UserInventoryDTO dto) {
+//        UserInventoryJPA jpa = new UserInventoryJPA();
+//        jpa.setInventory(mapToJPA(dto.getInventory()));
+//        jpa.setUser(dto.);
+//    }
 }

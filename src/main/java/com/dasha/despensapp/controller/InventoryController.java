@@ -47,5 +47,8 @@ public class InventoryController {
     }
 
     //compartir un inventario con otros usuarios
-
+    @PostMapping(path = "/{idInventory}/invitation/{user}")
+    public UserInventoryDTO sendInvitation(@PathVariable Long idInventory, @PathVariable String user) {
+        return inventoryService.sendInvitation(idInventory, user);
+    }
 }
