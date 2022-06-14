@@ -1,6 +1,7 @@
 package com.dasha.despensapp.repository.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -22,6 +23,9 @@ public class ProductJPA {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_inventory", nullable=false)
     private InventoryJPA inventory;
+
+    @OneToMany(mappedBy="product", fetch = FetchType.LAZY)
+    private List<ShoppingProductJPA> shoppingProducts;
 
     public Long getId() {
         return id;
@@ -77,5 +81,13 @@ public class ProductJPA {
 
     public void setAmount(Long amount) {
         this.amount = amount;
+    }
+
+    public List<ShoppingProductJPA> getShoppingProducts() {
+        return shoppingProducts;
+    }
+
+    public void setShoppingProducts(List<ShoppingProductJPA> shoppingProducts) {
+        this.shoppingProducts = shoppingProducts;
     }
 }

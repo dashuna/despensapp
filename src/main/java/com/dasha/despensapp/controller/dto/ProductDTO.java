@@ -1,7 +1,5 @@
 package com.dasha.despensapp.controller.dto;
 
-import com.dasha.despensapp.repository.entity.InventoryJPA;
-
 public class ProductDTO {
     private Long id;
     private String name;

@@ -1,7 +1,11 @@
 package com.dasha.despensapp.repository.entity;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "inventories")
@@ -12,10 +16,12 @@ public class InventoryJPA {
     private String name;
 
     @OneToMany(mappedBy="inventory")
-    private List<UserInventoryJPA> userInventories;
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Set<UserInventoryJPA> userInventories;
 
     @OneToMany(mappedBy="inventory")
-    private List<ProductJPA> products;
+    @LazyCollection(LazyCollectionOption.TRUE)
+    private Set<ProductJPA> products;
 
     public Long getId() {
         return id;
@@ -33,19 +39,19 @@ public class InventoryJPA {
         this.name = name;
     }
 
-    public List<UserInventoryJPA> getUserInventories() {
+    public Set<UserInventoryJPA> getUserInventories() {
         return userInventories;
     }
 
-    public void setUserInventories(List<UserInventoryJPA> userInventories) {
+    public void setUserInventories(Set<UserInventoryJPA> userInventories) {
         this.userInventories = userInventories;
     }
 
-    public List<ProductJPA> getProducts() {
+    public Set<ProductJPA> getProducts() {
         return products;
     }
 
-    public void setProducts(List<ProductJPA> products) {
+    public void setProducts(Set<ProductJPA> products) {
         this.products = products;
     }
 }

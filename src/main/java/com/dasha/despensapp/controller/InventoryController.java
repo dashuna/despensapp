@@ -51,4 +51,9 @@ public class InventoryController {
     public UserInventoryDTO sendInvitation(@PathVariable Long idInventory, @PathVariable String user) {
         return inventoryService.sendInvitation(idInventory, user);
     }
+
+    @PatchMapping(path = "/invitation")
+    public void updateInvitation(@RequestBody UserInventoryDTO userInventoryDTO) {
+        inventoryService.updateInvitation(userInventoryDTO.getId(), userInventoryDTO.getAccepted());
+    }
 }

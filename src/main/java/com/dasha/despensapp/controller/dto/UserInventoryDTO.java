@@ -1,7 +1,5 @@
 package com.dasha.despensapp.controller.dto;
 
-import org.apache.catalina.User;
-
 public class UserInventoryDTO {
     private Long id;
     private InventoryDTO inventory;

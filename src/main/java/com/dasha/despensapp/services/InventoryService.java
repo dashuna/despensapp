@@ -136,6 +136,17 @@ public class InventoryService {
         return dto;
     }
 
+    public void updateInvitation(Long id, Boolean accepted) {
+        if (accepted) {
+            UserInventoryJPA userInventory = userInventoryRepository.getById(id);
+            userInventory.setAccepted(Boolean.TRUE);
+            userInventoryRepository.save(userInventory);
+        } else {
+            userInventoryRepository.deleteById(id);
+        }
+
+    }
+
 //    private UserInventoryJPA mapToJPA (UserInventoryDTO dto) {
 //        UserInventoryJPA jpa = new UserInventoryJPA();
 //        jpa.setInventory(mapToJPA(dto.getInventory()));
