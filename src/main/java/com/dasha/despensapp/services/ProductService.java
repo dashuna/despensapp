@@ -54,7 +54,6 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         productRepository.deleteById(id);
-
     }
 
     private ProductDTO mapToDTO(ProductJPA jpa) {

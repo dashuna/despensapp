@@ -1,6 +1,7 @@
 package com.dasha.despensapp.repository.entity;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -18,7 +19,7 @@ public class ProductJPA {
     private CategoryJPA category;
 
     private byte[] photo;
-    private Long amount;
+    private BigDecimal amount;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_inventory", nullable=false)
@@ -75,11 +76,11 @@ public class ProductJPA {
         this.inventory = inventory;
     }
 
-    public Long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

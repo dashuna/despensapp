@@ -1,5 +1,7 @@
 package com.dasha.despensapp.controller.dto;
 
+import java.math.BigDecimal;
+
 public class ProductDTO {
     private Long id;
     private String name;
@@ -8,12 +10,12 @@ public class ProductDTO {
     private byte[] photo;
 
     private Long inventoryId;
-    private Long amount;
+    private BigDecimal amount;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, String description, CategoryDTO category, byte[] photo, Long inventoryId, Long amount) {
+    public ProductDTO(Long id, String name, String description, CategoryDTO category, byte[] photo, Long inventoryId, BigDecimal amount) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -71,11 +73,11 @@ public class ProductDTO {
         this.photo = photo;
     }
 
-    public Long getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Long amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 }

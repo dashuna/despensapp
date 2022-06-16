@@ -52,7 +52,14 @@ public class ShoppingProductController {
         return shoppingProductService.updateShoppingProduct(shoppingProductDTO.getId(), shoppingProductDTO.getAmount());
     }
 
+    @PatchMapping(path = "/{idShoppingProduct}/buy")
+    public ShoppingProductDTO buyShoppingProduct(@PathVariable Long idShoppingProduct) {
+        return shoppingProductService.buyShoppingProduct(idShoppingProduct, jwtTokenUtil.getIdUser());
+    }
 
-
-
+    @DeleteMapping("{idShoppingProduct}")
+    public ResponseEntity<?> deleteProduct(@PathVariable Long idShoppingProduct) {
+        shoppingProductService.deleteShoppingProduct(idShoppingProduct);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

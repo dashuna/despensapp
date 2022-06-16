@@ -66,6 +66,24 @@ public class ShoppingProductService {
         return mapToDTO(jpa);
     }
 
+    public ShoppingProductDTO buyShoppingProduct(Long idShoppingProduct, Long idUser) {
+        ShoppingProductJPA jpa = shoppingProductRepository.getById(idShoppingProduct);
+        jpa.setBuyed(Boolean.TRUE);
+        jpa.setBuyedDate(LocalDateTime.now());
+        jpa.setUserBuyed(userRepository.getById(idUser));
+        jpa = shoppingProductRepository.save(jpa);
+
+        ProductJPA productJPA = jpa.getProduct();
+        productJPA.setAmount(productJPA.getAmount().add(jpa.getAmount()));
+        productRepository.save(productJPA);
+
+        return mapToDTO(jpa);
+    }
+
+    public void deleteShoppingProduct(Long idShoppingProduct) {
+        shoppingProductRepository.deleteById(idShoppingProduct);
+    }
+
     private ShoppingProductDTO mapToDTO(ShoppingProductJPA jpa) {
         ShoppingProductDTO dto = new ShoppingProductDTO();
         dto.setId(jpa.getId());
