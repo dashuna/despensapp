@@ -1,12 +1,14 @@
 package com.dasha.despensapp.controller;
 
 import com.dasha.despensapp.config.JwtTokenUtil;
+import com.dasha.despensapp.controller.dto.ProductDTO;
 import com.dasha.despensapp.controller.dto.ShoppingInventoryDTO;
 import com.dasha.despensapp.controller.dto.ShoppingProductDTO;
 import com.dasha.despensapp.controller.dto.UserNameDTO;
 import com.dasha.despensapp.services.ShoppingProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +25,7 @@ public class ShoppingProductController {
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> insertShoppingProduct(@RequestBody ShoppingProductDTO shoppingProductDTO){
         if (shoppingProductService.isValidProduct(shoppingProductDTO.getProduct().getId())) {
             shoppingProductDTO.setUserAdded(buildActualUser());
@@ -44,6 +46,12 @@ public class ShoppingProductController {
         dto.setId(jwtTokenUtil.getIdUser());
         return dto;
     }
+
+    @PatchMapping
+    public ShoppingProductDTO updateShoppingProduct(@RequestBody ShoppingProductDTO shoppingProductDTO) {
+        return shoppingProductService.updateShoppingProduct(shoppingProductDTO.getId(), shoppingProductDTO.getAmount());
+    }
+
 
 
 

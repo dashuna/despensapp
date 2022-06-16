@@ -14,6 +14,7 @@ import com.dasha.despensapp.repository.entity.UserJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,13 @@ public class ShoppingProductService {
     public boolean isValidProduct(Long productId) {
         Optional<ShoppingProductJPA> opt = shoppingProductRepository.findByProductIdAndBuyedFalse(productId);
         return opt.isEmpty();
+    }
+
+    public ShoppingProductDTO updateShoppingProduct(Long idShoppingProduct, BigDecimal amount) {
+        ShoppingProductJPA jpa = shoppingProductRepository.getById(idShoppingProduct);
+        jpa.setAmount(amount);
+        jpa = shoppingProductRepository.save(jpa);
+        return mapToDTO(jpa);
     }
 
     private ShoppingProductDTO mapToDTO(ShoppingProductJPA jpa) {
