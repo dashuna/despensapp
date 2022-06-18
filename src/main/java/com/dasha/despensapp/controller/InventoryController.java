@@ -4,8 +4,11 @@ import com.dasha.despensapp.config.JwtTokenUtil;
 import com.dasha.despensapp.controller.dto.InventoryDTO;
 import com.dasha.despensapp.controller.dto.UserDTO;
 import com.dasha.despensapp.controller.dto.UserInventoryDTO;
+import com.dasha.despensapp.exceptions.UserNotFoundException;
 import com.dasha.despensapp.services.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -48,8 +51,13 @@ public class InventoryController {
 
     //compartir un inventario con otros usuarios
     @PostMapping(path = "/{idInventory}/invitation/{user}")
-    public UserInventoryDTO sendInvitation(@PathVariable Long idInventory, @PathVariable String user) {
-        return inventoryService.sendInvitation(idInventory, user);
+    public ResponseEntity<?> sendInvitation(@PathVariable Long idInventory, @PathVariable String user) {
+        try {
+            UserInventoryDTO invitation = inventoryService.sendInvitation(idInventory, user);
+            return ResponseEntity.ok(invitation);
+        } catch (UserNotFoundException userNot) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(userNot);
+        }
     }
 
     @PatchMapping(path = "/invitation")

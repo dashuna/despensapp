@@ -3,6 +3,7 @@ package com.dasha.despensapp.services;
 import com.dasha.despensapp.controller.dto.InventoryDTO;
 import com.dasha.despensapp.controller.dto.UserDTO;
 import com.dasha.despensapp.controller.dto.UserInventoryDTO;
+import com.dasha.despensapp.exceptions.UserNotFoundException;
 import com.dasha.despensapp.repository.InventoryRepository;
 import com.dasha.despensapp.repository.UserInventoryRepository;
 import com.dasha.despensapp.repository.UserRepository;
@@ -10,6 +11,7 @@ import com.dasha.despensapp.repository.entity.InventoryJPA;
 import com.dasha.despensapp.repository.entity.UserInventoryJPA;
 import com.dasha.despensapp.repository.entity.UserJPA;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -81,13 +83,16 @@ public class InventoryService {
         return userInventoryDTO;
     }
 
-    public UserInventoryDTO sendInvitation(Long idInventory, String user) {
+    public UserInventoryDTO sendInvitation(Long idInventory, String user) throws UserNotFoundException {
 //        UserInventoryJPA jpa = mapToJPA(idInventory);
 //        InventoryJPA inventoryJPA = inventoryRepository.getById();
 
         UserInventoryJPA userInventoryJPA = new UserInventoryJPA();
         userInventoryJPA.setInventory(inventoryRepository.getById(idInventory));
-        userInventoryJPA.setUser(userRepository.findByUser(user).get());
+
+        UserJPA userJPA = userRepository.findByUser(user).orElseThrow(() -> new UserNotFoundException(user));
+        userInventoryJPA.setUser(userJPA);
+
         userInventoryJPA.setAccepted(false);
         userInventoryJPA.setAdmin(false);
         userInventoryRepository.save(userInventoryJPA);
