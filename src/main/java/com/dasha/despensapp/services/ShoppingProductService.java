@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -119,7 +120,9 @@ public class ShoppingProductService {
         dto.setName(jpa.getName());
         dto.setDescription(jpa.getDescription());
 //        dto.setCategory(mapToDTO(jpa.getCategory()));
-        dto.setPhoto(jpa.getPhoto());
+        if (jpa.getPhoto() != null && jpa.getPhoto().length > 0) {
+            dto.setPhoto(Base64.getEncoder().encodeToString(jpa.getPhoto()));
+        }
         dto.setAmount(jpa.getAmount());
         return dto;
     }

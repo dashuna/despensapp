@@ -11,8 +11,10 @@ import com.dasha.despensapp.repository.entity.ProductJPA;
 import com.dasha.despensapp.repository.entity.UserJPA;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,7 +64,9 @@ public class ProductService {
         dto.setName(jpa.getName());
         dto.setDescription(jpa.getDescription());
         dto.setCategory(mapToDTO(jpa.getCategory()));
-        dto.setPhoto(jpa.getPhoto());
+        if (jpa.getPhoto() != null && jpa.getPhoto().length > 0) {
+            dto.setPhoto(Base64.getEncoder().encodeToString(jpa.getPhoto()));
+        }
         dto.setAmount(jpa.getAmount());
         return dto;
     }
@@ -73,7 +77,9 @@ public class ProductService {
         jpa.setName(dto.getName());
         jpa.setDescription(dto.getDescription());
         jpa.setCategory(categoryRepository.findById(dto.getCategory().getId()).get());
-        jpa.setPhoto(dto.getPhoto());
+        if (StringUtils.hasText(dto.getPhoto())) {
+            jpa.setPhoto(Base64.getDecoder().decode(dto.getPhoto()));
+        }
         jpa.setInventory(inventoryRepository.findById(dto.getInventoryId()).get());
         jpa.setAmount(dto.getAmount());
 

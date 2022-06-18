@@ -7,7 +7,7 @@ public class ProductDTO {
     private String name;
     private String description;
     private CategoryDTO category;
-    private byte[] photo;
+    private String photo;
 
     private Long inventoryId;
     private BigDecimal amount;
@@ -15,7 +15,7 @@ public class ProductDTO {
     public ProductDTO() {
     }
 
-    public ProductDTO(Long id, String name, String description, CategoryDTO category, byte[] photo, Long inventoryId, BigDecimal amount) {
+    public ProductDTO(Long id, String name, String description, CategoryDTO category, String photo, Long inventoryId, BigDecimal amount) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -65,11 +65,11 @@ public class ProductDTO {
         this.category = category;
     }
 
-    public byte[] getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 
-    public void setPhoto(byte[] photo) {
+    public void setPhoto(String photo) {
         this.photo = photo;
     }
 
